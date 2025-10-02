@@ -39,7 +39,7 @@ mod tests {
         let order_template = create_order_template();
         
         let your_order=Order{
-            name:String::from("Hacker int Rust"),
+            name:String::from("Hacker in Rust"),
             year:order_template.year,
             made_by_phone:order_template.made_by_phone,
             made_by_mobile:order_template.made_by_mobile,
