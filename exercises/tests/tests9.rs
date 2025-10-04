@@ -27,15 +27,24 @@
 //
 // You should NOT modify any existing code except for adding two lines of attributes.
 
-// I AM NOT DONE
+// 
 
 extern "Rust" {
     fn my_demo_function(a: u32) -> u32;
+    #[link_name = "my_demo_function"]  // 添加这行，创建别名
     fn my_demo_function_alias(a: u32) -> u32;
 }
-
+// #[no_mangle]  // 防止名称修饰，确保链接器能找到这个函数
+// pub extern "Rust" fn my_demo_function(a: u32) -> u32 {
+//     a
+// }
+// #[no_mangle]
+// pub extern "Rust" fn my_demo_function_alias(a: u32) -> u32 {
+//     a * 2  // 为了区分，让这个函数有不同的行为
+// }
 mod Foo {
     // No `extern` equals `extern "Rust"`.
+    #[no_mangle]
     fn my_demo_function(a: u32) -> u32 {
         a
     }

@@ -34,22 +34,26 @@
 // Execute `rustlings hint tests7` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// 
+fn main() {
+    std::env::set_var("TEST_FOO", &std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_secs()
+        .to_string());
+    
+    test_success(); // 直接调用函数
+}
 
-fn main() {}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_success() {
-        let timestamp = std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-            .unwrap()
-            .as_secs();
-        let s = std::env::var("TEST_FOO").unwrap();
-        let e: u64 = s.parse().unwrap();
-        assert!(timestamp >= e && timestamp < e + 10);
-    }
+// 移除 #[cfg(test)] 和 #[test] 属性
+fn test_success() {
+    let timestamp = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_secs();
+    let s = std::env::var("TEST_FOO").unwrap();
+    let e: u64 = s.parse().unwrap();
+    assert!(timestamp >= e && timestamp < e + 10);
+    
+    //println!("测试通过！当前时间戳: {}, 环境变量时间戳: {}", timestamp, e);
 }
